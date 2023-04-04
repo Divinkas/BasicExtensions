@@ -5,11 +5,11 @@ For implement library:
   - add dependency to build.gradle (project lvl)
   
   allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+  	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+   }
   
   
   - add dependency to build.gradle (app lvl)
