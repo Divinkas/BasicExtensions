@@ -21,16 +21,15 @@ fun Context.getGridLayoutManager(columnCount: Int): GridLayoutManager =
 fun Context.getCompatColor(@ColorRes colorRes: Int) =
     ContextCompat.getColor(this, colorRes)
 
-fun Context.toastLong(mgs: String = "", isLongDuration: Boolean = false) {
+fun Context.toast(mgs: String = "", isLongDuration: Boolean = false) {
     Toast.makeText(this, mgs, if (isLongDuration) Toast.LENGTH_LONG else Toast.LENGTH_SHORT).show()
 }
 
 fun Context.getDisplayWidth(): Int = this.resources.displayMetrics.widthPixels
 fun Context.getDisplayHeight(): Int = this.resources.displayMetrics.heightPixels
 
-fun Context.openLink(link: String) {
+fun Context.openLink(link: String, withFlags: (Intent) -> Unit = {}) {
     if (link.isEmpty()) return
-
-    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link)).apply { withFlags.invoke(this) }
     startActivity(browserIntent)
 }
